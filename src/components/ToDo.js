@@ -9,16 +9,37 @@ function ToDo(props) {
   };
 
   return (
-    <div className='container'>
+    <div className='container row'>
+      <div className='form-check col-sm align-self-center'></div>
       <div
-        style={{ cursor: 'pointer' }}
         id={todo.id}
-        value={todo.id}
+        key={todo.id + todo.task}
+        value={todo.task}
         name='todo'
-        className={todo.complete ? 'strike' : ''}
-        onClick={handleClick}
+        className={`col-sm align-self-center  ${todo.complete ? 'strike' : ''}`}
       >
-        {todo.task}
+        <input
+          className='form-check-input'
+          type='checkbox'
+          value=''
+          id='flexCheckDefault'
+          onClick={handleClick}
+        />
+        <label
+          id={todo.id}
+          key={todo.id + todo.task}
+          value={todo.task}
+          name='todo'
+          className={`col-sm align-self-center form-check-label  ${
+            todo.complete ? 'strike' : ''
+          }`}
+          htmlFor='flexCheckDefault'
+        >
+          {todo.task}
+        </label>
+      </div>
+      <div className='col-sm align-self-center'>
+        <i className='fa-solid fa-pen-to-square '></i>
       </div>
     </div>
   );

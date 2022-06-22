@@ -16,13 +16,14 @@ const ToDoForm = (props) => {
   };
 
   return (
-    <div className='container '>
+    <div className='container text-center'>
       <form action='' onSubmit={handleSubmit}>
         <input
           value={userInput}
           type='text'
           placeholder='Enter a task'
           onChange={handleChange}
+          required
         />
         <button type='submit'>Add Task</button>
       </form>

@@ -5,7 +5,7 @@ function ToDoList(props) {
   const { toDoList, handleToggle, handleFilter } = props;
 
   return (
-    <div className='container text-center'>
+    <div className='container '>
       {toDoList.map((todo) => {
         return (
           <ToDo
@@ -16,8 +16,8 @@ function ToDoList(props) {
           />
         );
       })}
-      <button className='btn btn-danger' onClick={handleFilter}>
-        Clear
+      <button className='btn btn-danger my-4' onClick={handleFilter}>
+        Clear Completed task
       </button>
     </div>
   );

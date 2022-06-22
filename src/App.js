@@ -6,10 +6,12 @@ import data from '../src/data.json';
 import Header from './components/Header';
 import ToDoList from './components/ToDoList';
 import ToDoForm from './components/ToDoForm';
+import { useEffect } from 'react';
 
 function App() {
   // state of lists
   const [toDoList, setToDoList] = useState(data);
+  const [idCount, setIdCount] = useState(toDoList.length);
 
   // change the complete status of task
   const handleToggle = (id) => {
@@ -22,6 +24,7 @@ function App() {
     setToDoList(changed);
   };
 
+  // filter the completed tasks
   const handleFilter = () => {
     let filtered = toDoList.filter((task) => {
       return !task.complete;
@@ -29,27 +32,30 @@ function App() {
     setToDoList(filtered);
   };
 
+  // add new task to the list
   const addTask = (userInput) => {
+    setIdCount((idCount) => idCount + 1);
     let copy = [...toDoList];
-    copy = [
-      ...copy,
-      { id: toDoList.length + 1, task: userInput, complete: false },
-    ];
+    copy = [...copy, { id: idCount, task: userInput, complete: false }];
     setToDoList(copy);
   };
 
+  useEffect(() => {
+    setIdCount((idCount) => idCount + 1);
+  }, []);
+
   return (
-    <div className='container'>
+    <div className='container text-center'>
       <Header />
       <ToDoList
         toDoList={toDoList}
         handleToggle={handleToggle}
         handleFilter={handleFilter}
       />
-      {/* <Home lists={lists} setLists={setLists} /> */}
-      {/* <Lists /> */}
 
       <ToDoForm addTask={addTask} />
+
+      <div></div>
     </div>
   );
 }
