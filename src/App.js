@@ -49,6 +49,7 @@ function App() {
       <Header />
       <ToDoList
         toDoList={toDoList}
+        setToDoList={setToDoList}
         handleToggle={handleToggle}
         handleFilter={handleFilter}
       />

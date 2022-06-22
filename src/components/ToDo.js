@@ -1,29 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function ToDo(props) {
-  const { todo, handleToggle } = props;
+  const { todo, handleToggle, updateTask, deleteTask } = props;
+
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleClick = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     handleToggle(e.currentTarget.id);
+    setIsChecked(!isChecked);
   };
 
   return (
     <div className='container row'>
-      <div className='form-check col-sm align-self-center'></div>
       <div
-        id={todo.id}
-        key={todo.id + todo.task}
-        value={todo.task}
-        name='todo'
-        className={`col-sm align-self-center  ${todo.complete ? 'strike' : ''}`}
+        // id={todo.id}
+        // key={todo.id + todo.task}
+        // value={todo.task}
+        // name='todo'
+        // className={`col-sm align-self-center form-check  ${
+        //   todo.complete ? 'strike' : ''
+        // }`}
+        className=' container col-sm align-self-center'
       >
         <input
-          className='form-check-input'
+          className={`col-sm align-self-center  form-check-input  ${
+            todo.complete ? 'strike' : ''
+          }`}
           type='checkbox'
-          value=''
-          id='flexCheckDefault'
+          value={todo.task}
+          id={todo.id}
+          name='todo'
+          // defaultChecked={todo.complete ? true : false}
           onClick={handleClick}
+          defaultChecked={todo.complete ? true : false && { isChecked }}
         />
         <label
           id={todo.id}
@@ -33,13 +43,23 @@ function ToDo(props) {
           className={`col-sm align-self-center form-check-label  ${
             todo.complete ? 'strike' : ''
           }`}
-          htmlFor='flexCheckDefault'
+          htmlFor={todo.id}
+          // onClick={handleClick}
         >
           {todo.task}
         </label>
       </div>
       <div className='col-sm align-self-center'>
-        <i className='fa-solid fa-pen-to-square '></i>
+        <i
+          className='fa-solid fa-trash-can mx-2'
+          onClick={() => {
+            deleteTask(todo.id);
+          }}
+        ></i>
+        <i
+          className='fa-solid fa-pen-to-square'
+          onClick={() => updateTask(todo)}
+        ></i>
       </div>
     </div>
   );
